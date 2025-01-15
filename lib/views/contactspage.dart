@@ -1,3 +1,4 @@
+import 'package:cloud_contacts/views/newcontactpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,6 +25,20 @@ class _ContactsPageState extends State<ContactsPage> {
         fontWeight: FontWeight.w400,),
       ),
       ),
+      body: Center(
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+
+          ],
+
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => NewContactPage(),));
+          }),
 
     );
   }

@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'cloud-contacts-d09b4.firebasestorage.app',
     measurementId: 'G-6QT06FLDBL',
   );
+
 }
