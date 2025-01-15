@@ -82,9 +82,15 @@ class _NewContactPageState extends State<NewContactPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () async{
-                    CollectionReference collref = FirebaseFirestore.instance.collection('contacts');
-                    await collref.add({'name': nameController.text});
-                    await collref.add({'number':numberController.text});
+                    try{
+                      CollectionReference collref = FirebaseFirestore.instance.collection('contacts');
+                      await collref.add({'name': nameController.text});
+                      await collref.add({'number':numberController.text});
+                    }
+                    catch(e){
+                      ScaffoldMessenger.of(context).showSnackBar
+                        (SnackBar(content: Text('Failed to store text: $e')));
+                    }
                   },
                   child: Text('Save Contact'),
                 ),
