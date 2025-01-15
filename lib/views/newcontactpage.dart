@@ -85,7 +85,7 @@ class _NewContactPageState extends State<NewContactPage> {
                     try{
                       CollectionReference collref = FirebaseFirestore.instance.collection('contacts');
                       await collref.add({'name': nameController.text});
-                      await collref.add({'number':numberController.text});
+                      await collref.add({'number':numberController.value});
                     }
                     catch(e){
                       ScaffoldMessenger.of(context).showSnackBar
