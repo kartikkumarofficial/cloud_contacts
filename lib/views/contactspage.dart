@@ -36,6 +36,7 @@ class _ContactsPageState extends State<ContactsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => NewContactPage(),));
           }),

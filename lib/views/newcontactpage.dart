@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class NewContactPage extends StatefulWidget {
@@ -8,12 +9,12 @@ class NewContactPage extends StatefulWidget {
 class _NewContactPageState extends State<NewContactPage> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
 
   void saveContact() {
     if (formKey.currentState!.validate()) {
       String name = nameController.text;
-      String phone = phoneController.text;
+      String phone = numberController.text;
 
       // Perform save action (e.g., save to database or show success message)
       ScaffoldMessenger.of(context).showSnackBar(
@@ -22,7 +23,7 @@ class _NewContactPageState extends State<NewContactPage> {
 
       // Clear fields after saving
       nameController.clear();
-      phoneController.clear();
+      numberController.clear();
     }
   }
 
@@ -60,7 +61,7 @@ class _NewContactPageState extends State<NewContactPage> {
               ),
               SizedBox(height: 16),
               TextFormField(
-                controller: phoneController,
+                controller: numberController,
                 decoration: InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
@@ -80,7 +81,11 @@ class _NewContactPageState extends State<NewContactPage> {
               SizedBox(height: 32),
               Center(
                 child: ElevatedButton(
-                  onPressed: saveContact,
+                  onPressed: () async{
+                    CollectionReference collref = FirebaseFirestore.instance.collection('contacts');
+                    await collref.add({'name': nameController.text});
+                    await collref.add({'number':numberController.text});
+                  },
                   child: Text('Save Contact'),
                 ),
               ),
