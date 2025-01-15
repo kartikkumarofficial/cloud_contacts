@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class ContactsPage extends StatefulWidget {
@@ -11,9 +12,17 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
+    var srcheight = MediaQuery.of(context).size.height;
+    var srcwidth = MediaQuery.of(context).size.width;
+    var srcsize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cloud Contacts'),
+        title: Text('Cloud Contacts',
+          style: GoogleFonts.cookie(
+        fontSize: srcwidth * 0.1,
+        fontWeight: FontWeight.w400,),
+      ),
       ),
 
     );
