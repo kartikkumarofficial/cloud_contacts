@@ -44,7 +44,6 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
           SnackBar(content: Text('Contact updated successfully')),
         );
 
-        // Go back to the previous screen
         Navigator.pop(context);
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
