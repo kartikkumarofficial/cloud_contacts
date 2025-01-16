@@ -86,7 +86,9 @@ class _NewContactPageState extends State<NewContactPage> {
                       CollectionReference collref = FirebaseFirestore.instance.collection('contacts');
                       await collref.add({
                         'name': nameController.text,
-                        'number':numberController.text});
+                        'number':numberController.text,
+                        'timestamp': FieldValue.serverTimestamp(),
+                      });
 
                       ScaffoldMessenger.of(context).showSnackBar
                         (SnackBar(content: Text('Contact Saved Successfully')));
