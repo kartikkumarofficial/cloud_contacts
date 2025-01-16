@@ -1,7 +1,8 @@
 import 'package:cloud_contacts/views/newcontactpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:cloud_contacts/views/newcontactpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({super.key});
@@ -11,6 +12,23 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
+  Stream<List<Map<String,dynamic>>>fetchContactsStream(){
+    return FirebaseFirestore.instance
+        .collection('contacts')
+        .orderBy('timestamp',descending:true)
+      .snapshots()
+      .map((snapshot)=> snapshot.docs.map((doc){
+        final data = doc.data();
+        return{
+          'id':doc.id,
+          'name':data['name'],
+          'number':data['number']
+        };
+    }).toList());
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     var srcheight = MediaQuery.of(context).size.height;
