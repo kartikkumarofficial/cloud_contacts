@@ -12,6 +12,8 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
+
+  //method that fetches contacts
   Stream<List<Map<String,dynamic>>>fetchContactsStream(){
     return FirebaseFirestore.instance
         .collection('contacts')
@@ -25,6 +27,17 @@ class _ContactsPageState extends State<ContactsPage> {
           'number':data['number']
         };
     }).toList());
+  }
+  Future<void> deleteContact(String contactId) async{
+    try{
+      await FirebaseFirestore.instance.collection('contacts').doc(contactId).delete();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Contact deleted successfully')));
+    }
+    catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to delete text : $e')));
+
+    }
+    }
   }
 
 
@@ -43,15 +56,31 @@ class _ContactsPageState extends State<ContactsPage> {
         fontWeight: FontWeight.w400,),
       ),
       ),
-      body: Center(
-        child:Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      // body: Center(
+      //   child:Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //
+      //
+      //     ],
+      //
+      //   ),
+      // ),
+      body: StreamBuilder<List<Map<String,dynamic>>>(
+        stream: fetchContactsStream(),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState==ConnectionState.waiting){
+            return Center(child: CircularProgressIndicator(),);
+          }else if (snapshot.hasError){
+            return Center(child: Text('Error: ${snapshot.error} '),);
+        }else if (!snapshot.hasData || snapshot.data!.isEmpty{
+          return Center(child: 'No contacts found.');
+          }else {
+          final contacts = snapshot.data!;
+          return ListView.builder(
 
-
-          ],
-
-        ),
+    )
+    }
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
