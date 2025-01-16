@@ -1,3 +1,4 @@
+import 'package:cloud_contacts/views/contactdetailspage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,6 +82,13 @@ class _ContactsPageState extends State<ContactsPage> {
                     ),
                   ),
                   child: ListTile(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          ContactDetailsPage(
+                              contactId: contact['id'],
+                              initialName: contact['name'],
+                              initialNumber: contact['number']),));
+                    },
                     leading: CircleAvatar(
                       child: Text(contact['name'][0].toUpperCase()),
                     ),
