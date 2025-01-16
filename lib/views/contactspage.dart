@@ -67,12 +67,12 @@ class _ContactsPageState extends State<ContactsPage> {
                   key: Key(contact['id']),
                   direction: DismissDirection.startToEnd,
                   onDismissed: (direction) {
-                    // Delete the contact when swiped
+
                     deleteContact(contact['id']);
                   },
                   background: Container(
                     color: Colors.red,
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 20),
                     child: Icon(
                       Icons.delete,
