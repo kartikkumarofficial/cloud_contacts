@@ -16,12 +16,10 @@ class _NewContactPageState extends State<NewContactPage> {
       String name = nameController.text;
       String phone = numberController.text;
 
-      // Perform save action (e.g., save to database or show success message)
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Contact saved: $name, $phone')),
       );
 
-      // Clear fields after saving
       nameController.clear();
       numberController.clear();
     }
